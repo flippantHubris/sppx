@@ -13,11 +13,15 @@
         "alias": {
           "@src": "./src",
           "@components": "./src/components",
+          "@common": "./src/components/common",
           "@constants": "./src/constants",
           "@navigation": "./src/navigation",
           "@screens": "./src/screens",
           "@api": "./src/api",
-          "@assets": "./assets"
+          "@assets": "./assets",
+          "@redux": "./src/redux",
+          "@actions": "./src/redux/actions",
+          "@reducers": "./src/redux/reducers"
         }
       }
     ]
