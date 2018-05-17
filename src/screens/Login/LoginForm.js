@@ -32,7 +32,7 @@ class LoginForm extends Component {
   onButtonPress() {
     const { email, password, authToken } = this.props;
     // this.props.loginUser(email, password, authToken);
-    this.props.loginThunk();
+    this.props.loginThunk(this.props.navigate);
     console.log("login");
     Keyboard.dismiss();
   }

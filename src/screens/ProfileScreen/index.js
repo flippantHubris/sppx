@@ -25,7 +25,7 @@ class ProfileScreen extends Component {
 
   onLogoutButtonPress() {
     this.props.logout(this.props.authToken);
-    this.props.navigation.navigate("login");
+    this.props.navigation.navigate("auth");
   }
 
   componentWillMount() {

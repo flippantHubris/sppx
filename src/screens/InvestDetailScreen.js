@@ -35,6 +35,9 @@ const parseHTML = str => {
   str = str.replace(/<\/li>/g, "\r");
   str = str.replace(/&amp;/g, "&");
   str = str.replace(/&nbsp;/g, " ");
+  str = str.replace("<em><strong>", "");
+  str = str.replace("</strong></em>", "");
+
   // str = str.replace(/i([\s\S]*?)Vimeo</a>/g, ' ');
 
   return str;
