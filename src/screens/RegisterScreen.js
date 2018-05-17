@@ -70,7 +70,7 @@ class RegisterScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.titleView}>
           <Text h4 style={styles.textStyle}>
             Create New Account
@@ -206,6 +206,9 @@ const styles = StyleSheet.create({
   imageView: {
     alignItems: "center",
     paddingTop: 20
+  },
+  scrollView: {
+    backgroundColor: "#ffffff"
   }
 });
 

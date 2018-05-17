@@ -18,7 +18,7 @@ class LoginScreen extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          {/* <Header headerText="Silcon Prarie" /> */}
+          {/*  <Header headerText="Silcon Prarie" /> */}
           <View style={styles.logoView}>
             <Image
               style={styles.logo}
@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
     height: 200
   },
   container: {
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    flex: 1,
+    justifyContent: "center"
   },
   containerOld: {
     flex: 1,

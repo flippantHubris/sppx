@@ -1,10 +1,16 @@
-import { Foundation, FontAwesome } from "@expo/vector-icons";
+import {
+  Foundation,
+  FontAwesome,
+  MaterialCommunityIcons,
+  SimpleLineIcons
+} from "@expo/vector-icons";
 import {
   StyleSheet,
   View,
   TouchableOpacity,
   FlatList,
-  Image
+  Image,
+  Button
 } from "react-native";
 import { Text } from "react-native-elements";
 import { connect } from "react-redux";
@@ -20,28 +26,40 @@ import {
 } from "@actions";
 import { Spinner } from "@common";
 
-const extractKey = ({ nid }) => nid;
+const extractKey = ({ nid }) => nid.toString();
+
+const Account = ({ onPress }) => (
+  <View style={{ paddingRight: 15 }}>
+    <TouchableOpacity style={styles.notificationWrapper} onPress={onPress}>
+      <SimpleLineIcons name="user" size={27} color="#ffffff" />
+    </TouchableOpacity>
+  </View>
+);
 
 class InvestScreen extends Component {
-  static navigationOptions = {
-    tabBarLabel: "INVEST",
-    tabBarIcon: ({ tintColor }) => (
-      <Foundation name="dollar-bill" size={27} color={tintColor} />
-    ),
-    header: null,
-    // title: 'Current Opportunities',
-    headerTitleStyle: {
-      alignSelf: "center",
-      fontSize: 22,
-      // backgroundColor: '#f2f2f2',
-      backgroundColor: "#ffffff",
-      color: "#212121",
-      fontWeight: "bold"
-    },
-    headerStyle: {
-      backgroundColor: "#f2f2f2"
-    }
-  };
+  // static navigationOptions = {
+  //   tabBarLabel: "INVEST",
+  //   tabBarIcon: ({ tintColor }) => (
+  //     <Foundation name="dollar-bill" size={27} color={tintColor} />
+  //   ),
+  //   header: null,
+  //   // title: 'Current Opportunities',
+  //   headerTitleStyle: {
+  //     alignSelf: "center",
+  //     fontSize: 22,
+  //     // backgroundColor: '#f2f2f2',
+  //     backgroundColor: "#ffffff",
+  //     color: "#212121",
+  //     fontWeight: "bold"
+  //   },
+  //   headerStyle: {
+  //     backgroundColor: "#f2f2f2"
+  //   }
+  // };
+
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: <Account onPress={() => navigation.navigate("profile")} />
+  });
   componentWillMount() {
     if (this.props.issuesFetched === false) {
       // this.props.InvestThunk();
@@ -96,17 +114,28 @@ class InvestScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.newTitleView}>
+          <Text h4>Current Opportunities</Text>
+        </View>
+        {this.renderList()}
+      </View>
+    );
+  }
+
+  renderOld() {
+    return (
+      <View style={styles.container}>
         <View style={styles.headerView}>
           <View style={styles.headerButton} />
-          <View style={styles.titleView}>
+          <View style={styles.newTitleView}>
             <Text h4>Current Opportunities</Text>
           </View>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("InvestOverview")}
           >
-            <View style={styles.headerButton}>
+            {/* <View style={styles.headerButton}>
               <FontAwesome name="question-circle" size={27} color="#2ecc71" />
-            </View>
+            </View> */}
           </TouchableOpacity>
         </View>
 
@@ -163,6 +192,11 @@ const styles = StyleSheet.create({
     position: "relative",
     paddingTop: 20,
     paddingBottom: 20
+  },
+  newTitleView: {
+    paddingTop: 20,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 

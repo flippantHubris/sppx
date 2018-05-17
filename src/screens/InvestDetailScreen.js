@@ -41,14 +41,14 @@ const parseHTML = str => {
 };
 
 class InvestDetailScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    // title: navigation.state.params.title,
-    tabBarLabel: "INVEST",
-    tabBarIcon: ({ tintColor }) => (
-      <Foundation name="dollar-bill" size={27} color={tintColor} />
-    ),
-    header: null
-  });
+  // static navigationOptions = ({ navigation }) => ({
+  //   // title: navigation.state.params.title,
+  //   tabBarLabel: "INVEST",
+  //   tabBarIcon: ({ tintColor }) => (
+  //     <Foundation name="dollar-bill" size={27} color={tintColor} />
+  //   ),
+  //   header: null
+  // });
 
   getSelectedIssue(iid) {
     return R.find(R.propEq("iid", this.props.invest.selectedIssueIid))(

@@ -10,6 +10,8 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "expo": "^27.0.1",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.13.0",
     "ramda": "^0.25.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",

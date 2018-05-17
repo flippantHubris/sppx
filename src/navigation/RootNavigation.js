@@ -1,7 +1,7 @@
 import React from "react";
 import { Notifications } from "expo";
 import { createSwitchNavigator, createStackNavigator } from "react-navigation";
-import MainTabNavigator from "./MainTabNavigator";
+// import MainTabNavigator from "./MainTabNavigator";
 import registerForPushNotificationsAsync from "../api/registerForPushNotificationsAsync";
 
 import LoginScreen from "@screens/Login";
@@ -9,21 +9,54 @@ import RegisterScreen from "@screens/RegisterScreen";
 import InvestScreen from "@screens/InvestScreen";
 import InvestDetail from "@screens/InvestDetailScreen";
 
-const AppNavigator = createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator
-});
+import ProfileScreen from "@screens/ProfileScreen";
 
-const RootNavigation = createStackNavigator(
+const basicHeader = {
+  headerStyle: {
+    backgroundColor: "#2ecc71"
+  },
+  headerMode: "float",
+  headerBackTitle: null,
+  title: "Silcon Prairie",
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 20
+  }
+};
+
+const MainNavigation = createStackNavigator(
   {
-    login: LoginScreen,
-    reg: RegisterScreen,
     invest: InvestScreen,
-    investDetail: InvestDetail
+    investDetail: InvestDetail,
+    profile: ProfileScreen
   },
   {
-    headerMode: "none"
+    initialRouteName: "invest",
+    navigationOptions: basicHeader
+  }
+);
+
+const AuthNavigation = createStackNavigator(
+  {
+    login: LoginScreen,
+    reg: RegisterScreen
+  },
+  {
+    initialRouteName: "login",
+    navigationOptions: basicHeader
+  }
+);
+
+const RootNavigation = createSwitchNavigator(
+  {
+    // You could add another route here for authentication.
+    // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+    auth: AuthNavigation,
+    main: MainNavigation
+  },
+  {
+    initialRouteName: "auth"
   }
 );
 
