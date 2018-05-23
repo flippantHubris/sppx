@@ -3,7 +3,7 @@ import {
   FontAwesome,
   MaterialCommunityIcons,
   SimpleLineIcons
-} from "@expo/vector-icons";
+} from '@expo/vector-icons';
 import {
   StyleSheet,
   View,
@@ -11,10 +11,10 @@ import {
   FlatList,
   Image,
   Button
-} from "react-native";
-import { Text } from "react-native-elements";
-import { connect } from "react-redux";
-import React, { Component } from "react";
+} from 'react-native';
+import { Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
 import {
   InvestThunk,
@@ -23,44 +23,32 @@ import {
   getAllIssueDetail,
   getIssues,
   setIid
-} from "@actions";
-import { Spinner } from "@common";
+} from '@actions';
+import { Spinner } from '@common';
+import HeaderButton from '@components/HeaderButton';
+import SpinnerView from '@components/SpinnerView';
 
 const extractKey = ({ nid }) => nid.toString();
 
-const Account = ({ onPress }) => (
-  <View style={{ paddingRight: 15 }}>
-    <TouchableOpacity style={styles.notificationWrapper} onPress={onPress}>
-      <SimpleLineIcons name="user" size={27} color="#ffffff" />
-    </TouchableOpacity>
-  </View>
-);
-
 class InvestScreen extends Component {
-  // static navigationOptions = {
-  //   tabBarLabel: "INVEST",
-  //   tabBarIcon: ({ tintColor }) => (
-  //     <Foundation name="dollar-bill" size={27} color={tintColor} />
-  //   ),
-  //   header: null,
-  //   // title: 'Current Opportunities',
-  //   headerTitleStyle: {
-  //     alignSelf: "center",
-  //     fontSize: 22,
-  //     // backgroundColor: '#f2f2f2',
-  //     backgroundColor: "#ffffff",
-  //     color: "#212121",
-  //     fontWeight: "bold"
-  //   },
-  //   headerStyle: {
-  //     backgroundColor: "#f2f2f2"
-  //   }
-  // };
-
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <Account onPress={() => navigation.navigate("profile")} />
+    headerRight: (
+      <HeaderButton
+        Comp={SimpleLineIcons}
+        name="user"
+        onPress={() => navigation.navigate('profile')}
+      />
+    )
   });
-  componentWillMount() {
+  // componentWillMount() {
+  //   if (this.props.issuesFetched === false) {
+  //     // this.props.InvestThunk();
+  //     this.props.getIssues();
+  //   }
+  //   this.props.resetDetails();
+  // }
+
+  componentDidMount() {
     if (this.props.issuesFetched === false) {
       // this.props.InvestThunk();
       this.props.getIssues();
@@ -71,9 +59,10 @@ class InvestScreen extends Component {
   renderList() {
     if (this.props.issuesFetched === false) {
       return (
-        <View style={styles.spinnerView}>
-          <Spinner size="large" />
-        </View>
+        // <View style={styles.spinnerView}>
+        //   <Spinner size="large" />
+        // </View>
+        <SpinnerView />
       );
     }
     return (
@@ -92,7 +81,7 @@ class InvestScreen extends Component {
 
     this.props.setIid(item.iid);
 
-    this.props.navigation.navigate("investDetail", { title: item.title });
+    this.props.navigation.navigate('investDetail', { title: item.title });
   }
 
   renderItem = ({ item }) => (
@@ -131,7 +120,7 @@ class InvestScreen extends Component {
             <Text h4>Current Opportunities</Text>
           </View>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("InvestOverview")}
+            onPress={() => this.props.navigation.navigate('InvestOverview')}
           >
             {/* <View style={styles.headerButton}>
               <FontAwesome name="question-circle" size={27} color="#2ecc71" />
@@ -147,56 +136,56 @@ class InvestScreen extends Component {
 
 const styles = StyleSheet.create({
   spinnerView: {
-    marginTop: 200,
+    // marginTop: 200,
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
+    // flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   headerView: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   headerButton: {
     width: 50,
     height: 50,
     // backgroundColor: '#8b9dcc',
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   container: {
     // marginTop: 20,
     flex: 1,
     // backgroundColor: '#e0e0e0',
-    backgroundColor: "#ffffff"
+    backgroundColor: '#ffffff'
   },
   row: {
     marginBottom: 2,
-    backgroundColor: "#2ecc71",
+    backgroundColor: '#2ecc71',
 
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   rowText: {
-    color: "#ffffff",
-    fontWeight: "bold",
+    color: '#ffffff',
+    fontWeight: 'bold',
     padding: 15
   },
   textView: {
     padding: 15
   },
   titleView: {
-    alignItems: "center",
-    position: "relative",
+    alignItems: 'center',
+    position: 'relative',
     paddingTop: 20,
     paddingBottom: 20
   },
   newTitleView: {
     paddingTop: 20,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

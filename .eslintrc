@@ -13,15 +13,28 @@
   "settings": {
     "import/resolver": {
       "babel-module": {
-        "extensions": [".js"]
+        "extensions": [
+          ".js"
+        ]
       }
     },
-    "import/extensions": [".js"]
+    "import/extensions": [
+      ".js"
+    ]
   },
   "rules": {
     "react/jsx-filename-extension": [
       "error",
-      { "extensions": [".js", ".jsx"] }
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "quotes": [
+      2,
+      "single"
     ],
     "global-require": "off",
     "no-console": "off",

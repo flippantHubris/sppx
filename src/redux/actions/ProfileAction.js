@@ -7,37 +7,44 @@ export const resetProfile = () => (dispatch: *, getState: *) => {
 };
 
 export const buttonPressed = button => ({
-  type: `${button}_BUTTON_PRESSED`,
+  type: `${button}_BUTTON_PRESSED`
 });
 
 export const editButtonPressed = () => ({
-  type: 'EDIT_BUTTON_PRESSED',
+  type: 'EDIT_BUTTON_PRESSED'
 });
 
 export const cancelButtonPressed = () => ({
-  type: 'CANCEL_BUTTON_PRESSED',
+  type: 'CANCEL_BUTTON_PRESSED'
 });
 
-export const onProfileChange = (profileType: string, field: string, payload: string) => ({
+export const onProfileChange = (
+  profileType: string,
+  field: string,
+  payload: string
+) => ({
   type: 'PROFILE_FIELD_CHANGED',
   profileType,
   field,
-  payload,
+  payload
 });
 
 export const myProfileChange = (profileType, field, payload) => ({
   type: 'PROFILE_FIELD_CHANGED',
   profileType,
   field,
-  payload,
+  payload
 });
 
-
-export const onFieldChange = (section: string, field: string, payload: string) => ({
+export const onFieldChange = (
+  section: string,
+  field: string,
+  payload: string
+) => ({
   type: 'FIELD_CHANGED',
   section,
   field,
-  payload,
+  payload
 });
 
 export const updateProfile = () => async (dispatch: *, getState: *) => {
@@ -49,14 +56,14 @@ export const updateProfile = () => async (dispatch: *, getState: *) => {
   const individual = getState().profile.individual;
   const body = {
     account,
-    individual,
+    individual
   };
 
   const bodyJson = JSON.stringify({
     profile: {
       account,
-      individual,
-    },
+      individual
+    }
   });
   dispatch({ type: 'PROFILE_UPDATE', bodyJson, stuff: 'asdasd' });
 
@@ -68,10 +75,10 @@ export const updateProfile = () => async (dispatch: *, getState: *) => {
     method: 'POST',
     headers: logHeaders,
     body: bodyJson,
-    cache: 'no-cache',
+    cache: 'no-cache'
   };
 
-  //const response = await fetch('http://sppx.dd:8083/rest/profile/edit', logInit);
+  // const response = await fetch('http://sppx.dd:8083/rest/profile/edit', logInit);
   const response = await fetch(getState().auth.url.profileEdit, logInit);
   const json = await response.json();
   if (response.status === 200) {
@@ -80,7 +87,7 @@ export const updateProfile = () => async (dispatch: *, getState: *) => {
     dispatch({
       type: 'PROFILE_UPDATE_FAILED',
       status: response.status,
-      json,
+      json
     });
     resetProfile(dispatch, getState);
   }
@@ -98,26 +105,25 @@ export const getUser = () => async (dispatch: *, getState: *) => {
   const logInit = {
     method: 'GET',
     headers: logHeaders,
-    cache: 'no-cache',
+    cache: 'no-cache'
   };
   console.log(`profile url ${url.profile}${uid}`);
   const response = await fetch(`${url.profile}${uid}`, logInit);
-  const json = await response.json();
+
   if (response.status === 200) {
+    const json = await response.json();
     dispatch({ type: 'USER_FETCH_SUCCESS', payload: json });
   } else {
     dispatch({
       type: 'USER_FETCH_FAILED',
-      payload: response.status,
-      response: json,
+      response
     });
-    alert(json);
   }
 };
 
 export const toggle = field => ({
-  type: `TOGGLE`,
-  field,
+  type: 'TOGGLE',
+  field
 });
 
 export const profileActions = {
@@ -129,5 +135,5 @@ export const profileActions = {
   editButtonPressed,
   cancelButtonPressed,
   buttonPressed,
-  toggle,
+  toggle
 };

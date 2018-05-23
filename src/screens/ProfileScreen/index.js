@@ -1,31 +1,37 @@
 import {
-  MaterialCommunityIcons,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
-} from "react-native";
-import { connect } from "react-redux";
-import React, { Component } from "react";
+} from 'react-native';
+import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { profileActions } from "@reducers/ducks/profile/action";
-import AccountContainer from "./containers/AccountContainer";
-import EditHeader from "./containers/EditHeader";
-import IndividualContainer from "./containers/IndividualContainer";
-import InvestorContainer from "./containers/InvestorContainer";
+import HeaderButton from '@components/HeaderButton';
+import { profileActions } from '@reducers/ducks/profile/action';
+import AccountContainer from './containers/AccountContainer';
+import EditHeader from './containers/EditHeader';
+import IndividualContainer from './containers/IndividualContainer';
+import InvestorContainer from './containers/InvestorContainer';
+
+import SpinnerView from '@components/SpinnerView';
 
 class ProfileScreen extends Component {
-  static navigationOptions = {
-    tabBarLabel: "PROFILE",
-    tabBarIcon: ({ tintColor }) => (
-      <MaterialCommunityIcons name="account" size={26} color={tintColor} />
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: (
+      <HeaderButton
+        Comp={MaterialCommunityIcons}
+        name="logout"
+        onPress={() => navigation.navigate('auth')}
+      />
     )
-  };
+  });
 
   onLogoutButtonPress() {
     this.props.logout(this.props.authToken);
-    this.props.navigation.navigate("auth");
+    this.props.navigation.navigate('auth');
   }
 
   componentWillMount() {
@@ -53,7 +59,7 @@ class ProfileScreen extends Component {
   renderLogoutButton() {
     const { navigate } = this.props.navigation;
     const logout = () => {
-      navigate("login");
+      navigate('login');
       this.props.postLogout();
     };
 
@@ -70,12 +76,10 @@ class ProfileScreen extends Component {
     if (this.props.isLoaded) {
       return this.renderProfile();
     }
-    // return (
-    //   <View style={styles.spinnerView}>
-    //     <Spinner size="large" />
-    //   </View>
-    // );
-    return <View>{this.renderLogoutButton()}</View>;
+    return (
+      // <View style={styles.spinnerView}>{/* <Spinner size="large" /> */}</View>
+      <SpinnerView />
+    );
   }
 }
 
@@ -87,15 +91,15 @@ const styles = StyleSheet.create({
   },
   spinnerView: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   editSpinner: {
     marginTop: 10
   },
   editButtons: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   editButton: {
     flex: 1
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff'
     // alignItems: "center",
     // justifyContent: "center"
   }
@@ -124,20 +128,20 @@ const Button = ({ onPress, children, style = styles.buttonStyle }) => {
 
 const buttonStyles = {
   textStyle: {
-    alignSelf: "center",
-    color: "#ffffff",
+    alignSelf: 'center',
+    color: '#ffffff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10
   },
   buttonStyle: {
     flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: "#2ecc71",
+    alignSelf: 'stretch',
+    backgroundColor: '#2ecc71',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#2ecc71",
+    borderColor: '#2ecc71',
     marginLeft: 5,
     marginRight: 5
   }
