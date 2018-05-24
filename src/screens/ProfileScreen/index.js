@@ -3,20 +3,39 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import SpinnerView from '@components/SpinnerView';
+
+import { branch, renderComponent, compose } from 'recompose';
 
 import HeaderButton from '@components/HeaderButton';
-import { profileActions } from '@reducers/ducks/profile/action';
+import { profileActions } from '@actions/profile';
 import AccountContainer from './containers/AccountContainer';
 import EditHeader from './containers/EditHeader';
 import IndividualContainer from './containers/IndividualContainer';
 import InvestorContainer from './containers/InvestorContainer';
 
-import SpinnerView from '@components/SpinnerView';
+const Spinner = () => (
+  <View style={styles.spinnerView}>
+    <ActivityIndicator size="large" />
+    <Text> Loading </Text>
+  </View>
+);
+
+const test = props => {
+  console.log(props);
+  return true;
+};
+
+const spinnerWhileLoading = branch(
+  test,
+  renderComponent(Spinner) // render Loading, else on to the next component
+);
 
 class ProfileScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -73,13 +92,17 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    if (this.props.isLoaded) {
-      return this.renderProfile();
-    }
-    return (
-      // <View style={styles.spinnerView}>{/* <Spinner size="large" /> */}</View>
-      <SpinnerView />
-    );
+    console.log(this.props);
+
+    // if (this.props.isLoaded) {
+    //   return this.renderProfile();
+    // }
+    // return (
+    //   // <View style={styles.spinnerView}>{/* <Spinner size="large" /> */}</View>
+    //   <SpinnerView />
+    // );
+    return this.renderProfile();
+    //
   }
 }
 
@@ -156,7 +179,8 @@ const mapStateToProps = ({ profile }) => {
     showUpdateButton,
     cancelButtonPressed,
     updatingProfile,
-    hasBeenEdited
+    hasBeenEdited,
+    loading
   } = meta;
   return {
     isLoaded,
@@ -167,8 +191,13 @@ const mapStateToProps = ({ profile }) => {
     showUpdateButton,
     updatingProfile,
     hasBeenEdited,
-    investor
+    investor,
+    loading
   };
 };
 
-export default connect(mapStateToProps, profileActions)(ProfileScreen);
+const withRedux = connect(mapStateToProps, profileActions)(ProfileScreen);
+
+// export default connect(mapStateToProps, profileActions)(ProfileScreen);
+
+export default spinnerWhileLoading(withRedux);

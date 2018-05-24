@@ -8,19 +8,19 @@ import {
   LOGIN_FAILED,
   LOGOUT_FAILED,
   LOGIN_USER
-} from "../actions/types";
+} from '../actions/types';
 // const baseURL = 'http://sppx.dd:8083/rest/';
-const baseURL = "https://api.sppx.io/rest/";
+const baseURL = 'https://api.sppx.io/rest/';
 
 const INITIAL_STATE_TEST = {
   uid: 175,
-  email: "flippanthubris",
-  password: "1875Jung1961!",
-  authToken: "",
+  email: 'flippanthubris',
+  password: '1875Jung1961!',
+  authToken: '',
   isLoggedIn: false,
-  cookie: "",
+  cookie: '',
   loginResponse: {},
-  error: "",
+  error: '',
   loading: false,
   user: {},
   // baseURL: 'http://sppx.dd:8083/rest/',
@@ -40,11 +40,11 @@ const INITIAL_STATE_TEST = {
   getProUrl: type => `${this.profile}profile/${this.uid}`,
   fetchInit: type => {
     const newHeaders = new Headers();
-    newHeaders.append("Content-Type", "application/json");
+    newHeaders.append('Content-Type', 'application/json');
     const newInit = {
       method: type,
       headers: newHeaders,
-      cache: "no-cache"
+      cache: 'no-cache'
     };
     return newInit;
   }
@@ -52,15 +52,15 @@ const INITIAL_STATE_TEST = {
 
 const INITIAL_STATE = {
   uid: 0,
-  email: "",
-  password: "",
+  email: '',
+  password: '',
   // email: 'testUser',
   // password: 'password',
-  authToken: "",
+  authToken: '',
   isLoggedIn: false,
-  cookie: "",
+  cookie: '',
   loginResponse: {},
-  error: "",
+  error: '',
   loading: false,
   user: {},
   // baseURL: 'http://sppx.dd:8083/rest/',
@@ -80,11 +80,11 @@ const INITIAL_STATE = {
   getProUrl: type => `${this.profile}profile/${this.uid}`,
   fetchInit: type => {
     const newHeaders = new Headers();
-    newHeaders.append("Content-Type", "application/json");
+    newHeaders.append('Content-Type', 'application/json');
     const newInit = {
       method: type,
       headers: newHeaders,
-      cache: "no-cache"
+      cache: 'no-cache'
     };
     return newInit;
   }
@@ -112,9 +112,9 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT_SUCCESSFUL:
       return { ...state, isLoggedIn: false };
     case LOGIN_FAILED:
-      return { ...state, error: "Authentication Failed", loading: false };
+      return { ...state, error: 'Authentication Failed', loading: false };
     case LOGIN_USER:
-      return { ...state, loading: true, error: "" };
+      return { ...state, loading: true, error: '' };
     default:
       return state;
   }
