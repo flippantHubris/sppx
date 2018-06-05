@@ -94,14 +94,14 @@ class ProfileScreen extends Component {
   render() {
     console.log(this.props);
 
-    // if (this.props.isLoaded) {
-    //   return this.renderProfile();
-    // }
-    // return (
-    //   // <View style={styles.spinnerView}>{/* <Spinner size="large" /> */}</View>
-    //   <SpinnerView />
-    // );
-    return this.renderProfile();
+    if (this.props.isLoaded) {
+      return this.renderProfile();
+    }
+    return (
+      // <View style={styles.spinnerView}>{/* <Spinner size="large" /> */}</View>
+      <SpinnerView />
+    );
+    // return this.renderProfile();
     //
   }
 }
@@ -198,6 +198,6 @@ const mapStateToProps = ({ profile }) => {
 
 const withRedux = connect(mapStateToProps, profileActions)(ProfileScreen);
 
-// export default connect(mapStateToProps, profileActions)(ProfileScreen);
+export default connect(mapStateToProps, profileActions)(ProfileScreen);
 
-export default spinnerWhileLoading(withRedux);
+// export default spinnerWhileLoading(withRedux);
